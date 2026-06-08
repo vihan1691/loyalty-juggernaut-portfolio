@@ -1,0 +1,934 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vihan Sharma · Senior PM · Loyalty Juggernaut</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink: #0d0d0d;
+    --ink-muted: #5a5a5a;
+    --ink-faint: #a0a0a0;
+    --surface: #faf9f7;
+    --surface-alt: #f2f0ec;
+    --surface-card: #ffffff;
+    --accent: #c84b2f;
+    --accent-warm: #e8632a;
+    --accent-gold: #d4a017;
+    --accent-teal: #1a7a6e;
+    --accent-navy: #1c2b4a;
+    --border: #e2e0db;
+    --border-strong: #c8c4bc;
+    --radius: 4px;
+    --radius-lg: 12px;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--surface);
+    color: var(--ink);
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 4vw;
+    height: 64px;
+    background: rgba(250,249,247,0.88);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800; font-size: 18px;
+    color: var(--ink);
+    text-decoration: none;
+    letter-spacing: -0.02em;
+  }
+  .nav-logo span { color: var(--accent); }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    font-size: 13px; font-weight: 500; letter-spacing: 0.06em;
+    text-transform: uppercase; color: var(--ink-muted);
+    text-decoration: none; transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--accent); }
+  .nav-cta {
+    font-size: 13px; font-weight: 500;
+    background: var(--accent); color: white;
+    padding: 8px 20px; border-radius: 2px;
+    text-decoration: none; letter-spacing: 0.04em;
+    transition: background 0.2s, transform 0.15s;
+  }
+  .nav-cta:hover { background: var(--accent-warm); transform: translateY(-1px); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    padding: 120px 4vw 80px;
+    gap: 4vw;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; top: -10%; right: -5%;
+    width: 60vw; height: 100vh;
+    background: radial-gradient(ellipse at 70% 40%, rgba(200,75,47,0.07) 0%, transparent 65%),
+                radial-gradient(ellipse at 30% 80%, rgba(26,122,110,0.06) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .hero-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 20px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .hero-eyebrow::before {
+    content: ''; display: block;
+    width: 32px; height: 1px; background: var(--accent);
+  }
+  .hero h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(48px, 5.5vw, 80px);
+    font-weight: 800;
+    line-height: 1.0;
+    letter-spacing: -0.03em;
+    color: var(--ink);
+    margin-bottom: 28px;
+  }
+  .hero h1 em {
+    font-style: normal;
+    color: var(--accent);
+    position: relative;
+  }
+  .hero-desc {
+    font-size: 18px; font-weight: 300; line-height: 1.7;
+    color: var(--ink-muted); max-width: 520px;
+    margin-bottom: 40px;
+  }
+  .hero-desc strong { font-weight: 500; color: var(--ink); }
+  .hero-actions { display: flex; gap: 16px; align-items: center; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--accent); color: white;
+    padding: 14px 32px; font-size: 15px; font-weight: 500;
+    text-decoration: none; border-radius: 2px;
+    transition: background 0.2s, transform 0.15s;
+    letter-spacing: 0.02em;
+  }
+  .btn-primary:hover { background: var(--accent-warm); transform: translateY(-2px); }
+  .btn-ghost {
+    border: 1px solid var(--border-strong); color: var(--ink);
+    padding: 13px 28px; font-size: 15px; font-weight: 400;
+    text-decoration: none; border-radius: 2px;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+
+  /* Hero metrics */
+  .hero-metrics {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 1px; background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    position: relative; z-index: 1;
+  }
+  .metric-cell {
+    background: var(--surface-card);
+    padding: 32px 28px;
+    transition: background 0.2s;
+  }
+  .metric-cell:hover { background: #fffdf9; }
+  .metric-num {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(32px, 3.5vw, 48px);
+    font-weight: 800; line-height: 1;
+    color: var(--ink); letter-spacing: -0.03em;
+    margin-bottom: 8px;
+  }
+  .metric-num span { color: var(--accent); }
+  .metric-label {
+    font-size: 13px; line-height: 1.4;
+    color: var(--ink-muted); font-weight: 400;
+  }
+  .metric-sub {
+    font-size: 11px; color: var(--ink-faint);
+    font-family: 'DM Mono', monospace;
+    margin-top: 6px; letter-spacing: 0.05em;
+  }
+
+  /* ── SECTION COMMON ── */
+  section { padding: 100px 4vw; }
+  .section-header {
+    display: flex; align-items: baseline;
+    gap: 16px; margin-bottom: 60px;
+  }
+  .section-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px; color: var(--accent);
+    letter-spacing: 0.1em;
+  }
+  .section-title {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(28px, 3vw, 44px);
+    font-weight: 700; letter-spacing: -0.02em;
+    color: var(--ink); line-height: 1.1;
+  }
+  .section-title em { font-style: normal; color: var(--accent); }
+  .section-line {
+    flex: 1; height: 1px;
+    background: var(--border); margin-left: 20px;
+  }
+
+  /* ── WHY LJI ── */
+  .why-lji {
+    background: var(--accent-navy);
+    color: white;
+    padding: 80px 4vw;
+    position: relative; overflow: hidden;
+  }
+  .why-lji::before {
+    content: '';
+    position: absolute; top: -50%; right: -10%;
+    width: 500px; height: 500px; border-radius: 50%;
+    background: rgba(200,75,47,0.15);
+    pointer-events: none;
+  }
+  .why-lji .section-num { color: rgba(255,255,255,0.4); }
+  .why-lji .section-title { color: white; }
+  .why-lji .section-line { background: rgba(255,255,255,0.15); }
+  .why-content {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 60px; align-items: start;
+  }
+  .why-text {
+    font-size: 19px; line-height: 1.75;
+    font-weight: 300; color: rgba(255,255,255,0.85);
+  }
+  .why-text strong { font-weight: 500; color: white; }
+  .why-text p { margin-bottom: 20px; }
+  .why-pull {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(22px, 2.5vw, 32px);
+    font-weight: 700; line-height: 1.3;
+    color: white; letter-spacing: -0.02em;
+    padding-left: 28px;
+    border-left: 3px solid var(--accent);
+  }
+  .why-pull em { font-style: italic; color: rgba(255,255,255,0.65); }
+
+  /* ── ABOUT / PHILOSOPHY ── */
+  .about-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 80px; align-items: start;
+  }
+  .about-text { font-size: 17px; line-height: 1.8; color: var(--ink-muted); }
+  .about-text p { margin-bottom: 20px; }
+  .about-text strong { color: var(--ink); font-weight: 500; }
+  .philosophy-list { display: flex; flex-direction: column; gap: 0; }
+  .phil-item {
+    padding: 28px 0;
+    border-bottom: 1px solid var(--border);
+    display: grid; grid-template-columns: 40px 1fr;
+    gap: 20px; align-items: start;
+  }
+  .phil-item:first-child { border-top: 1px solid var(--border); }
+  .phil-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px; color: var(--accent);
+    letter-spacing: 0.1em; padding-top: 4px;
+  }
+  .phil-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 16px; font-weight: 700;
+    color: var(--ink); margin-bottom: 8px;
+    letter-spacing: -0.01em;
+  }
+  .phil-body { font-size: 15px; color: var(--ink-muted); line-height: 1.6; }
+
+  /* ── FIT TABLE ── */
+  .fit-section { background: var(--surface-alt); }
+  .fit-table { width: 100%; border-collapse: collapse; }
+  .fit-table thead th {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--ink-faint);
+    padding: 0 24px 16px; text-align: left;
+    border-bottom: 1px solid var(--border-strong);
+  }
+  .fit-table tbody tr {
+    border-bottom: 1px solid var(--border);
+    transition: background 0.15s;
+  }
+  .fit-table tbody tr:hover { background: rgba(200,75,47,0.03); }
+  .fit-table td {
+    padding: 28px 24px; vertical-align: top;
+  }
+  .fit-req {
+    font-size: 14px; color: var(--ink-muted); line-height: 1.55;
+    font-style: italic; max-width: 320px;
+  }
+  .fit-evidence {
+    font-size: 15px; color: var(--ink); line-height: 1.6;
+  }
+  .fit-evidence strong { color: var(--accent); font-weight: 500; }
+  .fit-badges {
+    display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px;
+  }
+  .badge {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px; letter-spacing: 0.05em;
+    padding: 4px 10px; border-radius: 2px;
+    font-weight: 500;
+  }
+  .badge-accent { background: rgba(200,75,47,0.1); color: var(--accent); }
+  .badge-teal { background: rgba(26,122,110,0.1); color: var(--accent-teal); }
+  .badge-navy { background: rgba(28,43,74,0.08); color: var(--accent-navy); }
+  .badge-gold { background: rgba(212,160,23,0.12); color: #a07810; }
+
+  /* ── EXPERIENCE ── */
+  .exp-grid { display: flex; flex-direction: column; gap: 0; }
+  .exp-item {
+    display: grid; grid-template-columns: 240px 1fr;
+    gap: 60px; padding: 60px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .exp-item:first-child { padding-top: 0; }
+  .exp-meta {}
+  .exp-company {
+    font-family: 'Syne', sans-serif;
+    font-size: 20px; font-weight: 700;
+    color: var(--ink); margin-bottom: 4px;
+  }
+  .exp-role {
+    font-size: 14px; color: var(--ink-muted);
+    margin-bottom: 6px; line-height: 1.4;
+  }
+  .exp-period {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px; color: var(--ink-faint);
+    letter-spacing: 0.08em;
+  }
+  .exp-kpis {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 1px; background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden; margin-top: 24px;
+  }
+  .exp-kpi {
+    background: var(--surface-card);
+    padding: 14px 16px;
+  }
+  .exp-kpi-num {
+    font-family: 'Syne', sans-serif;
+    font-size: 22px; font-weight: 800;
+    color: var(--ink); letter-spacing: -0.02em;
+    line-height: 1;
+  }
+  .exp-kpi-num span { color: var(--accent); }
+  .exp-kpi-label { font-size: 11px; color: var(--ink-faint); margin-top: 4px; line-height: 1.3; }
+  .exp-content {}
+  .exp-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 22px; font-weight: 700;
+    color: var(--ink); margin-bottom: 6px;
+    letter-spacing: -0.01em;
+  }
+  .exp-subtitle {
+    font-size: 13px; color: var(--ink-faint);
+    font-family: 'DM Mono', monospace;
+    letter-spacing: 0.06em; text-transform: uppercase;
+    margin-bottom: 24px;
+  }
+  .exp-bullets { list-style: none; display: flex; flex-direction: column; gap: 14px; }
+  .exp-bullets li {
+    font-size: 15px; line-height: 1.65; color: var(--ink-muted);
+    padding-left: 20px; position: relative;
+  }
+  .exp-bullets li::before {
+    content: '→'; position: absolute; left: 0;
+    color: var(--accent); font-size: 13px; top: 2px;
+  }
+  .exp-bullets li strong { color: var(--ink); font-weight: 500; }
+
+  /* ── SKILLS ── */
+  .skills-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+  }
+  .skill-card {
+    background: var(--surface-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 28px 24px;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+  .skill-card:hover { border-color: var(--accent); transform: translateY(-3px); }
+  .skill-category {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--accent);
+    margin-bottom: 16px;
+  }
+  .skill-heading {
+    font-family: 'Syne', sans-serif;
+    font-size: 16px; font-weight: 700;
+    color: var(--ink); margin-bottom: 16px;
+    line-height: 1.2;
+  }
+  .skill-items { display: flex; flex-direction: column; gap: 10px; }
+  .skill-row { display: flex; flex-direction: column; gap: 5px; }
+  .skill-name { font-size: 13px; color: var(--ink-muted); font-weight: 400; }
+  .skill-bar {
+    height: 3px; background: var(--surface-alt);
+    border-radius: 2px; overflow: hidden;
+  }
+  .skill-fill { height: 100%; border-radius: 2px; background: var(--accent); }
+
+  /* ── CTA ── */
+  .cta-section {
+    background: var(--surface-card);
+    border-top: 1px solid var(--border);
+    padding: 100px 4vw;
+    text-align: center;
+  }
+  .cta-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px; color: var(--accent);
+    letter-spacing: 0.12em; text-transform: uppercase;
+    margin-bottom: 24px;
+  }
+  .cta-title {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(36px, 4vw, 60px);
+    font-weight: 800; letter-spacing: -0.03em;
+    color: var(--ink); line-height: 1.05;
+    margin-bottom: 20px;
+  }
+  .cta-title em { font-style: normal; color: var(--accent); }
+  .cta-sub {
+    font-size: 18px; color: var(--ink-muted); font-weight: 300;
+    max-width: 480px; margin: 0 auto 48px; line-height: 1.6;
+  }
+  .cta-actions { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+  .btn-big {
+    background: var(--accent); color: white;
+    padding: 18px 44px; font-size: 16px; font-weight: 500;
+    text-decoration: none; border-radius: 2px;
+    letter-spacing: 0.02em;
+    transition: background 0.2s, transform 0.15s;
+  }
+  .btn-big:hover { background: var(--accent-warm); transform: translateY(-2px); }
+  .btn-big-ghost {
+    border: 1px solid var(--border-strong); color: var(--ink);
+    padding: 17px 40px; font-size: 16px; font-weight: 400;
+    text-decoration: none; border-radius: 2px;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .btn-big-ghost:hover { border-color: var(--accent); color: var(--accent); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--ink);
+    color: rgba(255,255,255,0.5);
+    padding: 32px 4vw;
+    display: flex; justify-content: space-between;
+    align-items: center; font-size: 13px;
+  }
+  footer .f-name {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700; color: white; font-size: 16px;
+  }
+  footer a { color: rgba(255,255,255,0.5); text-decoration: none; transition: color 0.2s; }
+  footer a:hover { color: white; }
+  footer .f-links { display: flex; gap: 24px; }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .hero-eyebrow { animation: fadeUp 0.6s ease both; }
+  .hero h1 { animation: fadeUp 0.6s 0.1s ease both; }
+  .hero-desc { animation: fadeUp 0.6s 0.2s ease both; }
+  .hero-actions { animation: fadeUp 0.6s 0.3s ease both; }
+  .hero-metrics { animation: fadeUp 0.6s 0.2s ease both; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    .hero { grid-template-columns: 1fr; min-height: auto; padding: 100px 5vw 60px; }
+    .hero-metrics { margin-top: 48px; }
+    .about-grid { grid-template-columns: 1fr; gap: 48px; }
+    .why-content { grid-template-columns: 1fr; gap: 40px; }
+    .exp-item { grid-template-columns: 1fr; gap: 32px; }
+    .skills-grid { grid-template-columns: 1fr 1fr; }
+    .nav-links { display: none; }
+  }
+  @media (max-width: 600px) {
+    .skills-grid { grid-template-columns: 1fr; }
+    .hero-metrics { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">VS<span>·</span>LJI</a>
+  <ul class="nav-links">
+    <li><a href="#why-lji">Why LJI</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#fit">Fit</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#skills">Skills</a></li>
+  </ul>
+  <a href="mailto:vihan1691@gmail.com" class="nav-cta">Get in Touch</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="hero-left">
+    <div class="hero-eyebrow">Application · Senior PM · Loyalty Juggernaut · 2026</div>
+    <h1>Vihan<br><em>Sharma</em></h1>
+    <p class="hero-desc">
+      I've built loyalty platforms from <strong>zero to 791K members</strong>, shipped 
+      <strong>agentic AI to production</strong>, and scaled a consumer app to 
+      <strong>1M+ MAU</strong>. GRAVTY® is the intersection of everything I've spent 10 
+      years getting good at.
+    </p>
+    <div class="hero-actions">
+      <a href="#fit" class="btn-primary">See Why I Fit</a>
+      <a href="#why-lji" class="btn-ghost">Why LJI for Me</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-metrics">
+      <div class="metric-cell">
+        <div class="metric-num">791<span>K+</span></div>
+        <div class="metric-label">Member enrolments in 7 months</div>
+        <div class="metric-sub">MVP → 220+ sites · 50%+ adoption</div>
+      </div>
+      <div class="metric-cell">
+        <div class="metric-num">200<span>K</span></div>
+        <div class="metric-label">A/B experiment cohort</div>
+        <div class="metric-sub">Gamified onboarding · Null result called early</div>
+      </div>
+      <div class="metric-cell">
+        <div class="metric-num"><span>+</span>5<span>%</span></div>
+        <div class="metric-label">Engagement frequency uplift</div>
+        <div class="metric-sub">12K-member Promotions test · 14 weeks</div>
+      </div>
+      <div class="metric-cell">
+        <div class="metric-num">1<span>M+</span></div>
+        <div class="metric-label">MAU on consumer platform</div>
+        <div class="metric-sub">QuaQua · 4th founding member · Year one</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY LJI -->
+<section class="why-lji" id="why-lji">
+  <div class="section-header">
+    <span class="section-num">00</span>
+    <h2 class="section-title">Why <em>LJI</em> for Me</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="why-content">
+    <div class="why-text">
+      <p>
+        Most loyalty platforms treat personalization as a features race — more tiers, more rewards, better UI. 
+        <strong>GRAVTY® is asking a different question:</strong> what does loyalty look like when you can model 
+        behaviour in real time across 400 million members?
+      </p>
+      <p>
+        That's not a marginal improvement. That's a structural shift in what enterprise loyalty can actually 
+        do for a brand. I've been building toward this problem — on smaller scale, with less data — for most 
+        of my career. The problems I find genuinely hard are the ones LJI is working on.
+      </p>
+      <p>
+        Hyderabad is home. The scale is real. The timing is right. 
+        This is where I want to build next.
+      </p>
+    </div>
+    <div class="why-pull">
+      "400M members means the personalisation problem is operating at a scale where most PM instincts 
+      <em>break.</em> That's the kind of problem I want to be close to."
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT / PM PHILOSOPHY -->
+<section id="about">
+  <div class="section-header">
+    <span class="section-num">01</span>
+    <h2 class="section-title">About &amp; <em>Philosophy</em></h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="about-grid">
+    <div class="about-text">
+      <p>
+        I'm a Product Manager with 10 years of building products that sit at the intersection of real 
+        human problems and serious business scale — from a <strong>1M+ MAU consumer social app</strong> 
+        to <strong>FDA-regulated life sciences platforms</strong> trusted by global teams.
+      </p>
+      <p>
+        I've shipped features used by hundreds of thousands of people. I've also sat in rooms where a 
+        wrong product call had regulatory consequences. That range — consumer intuition on one side, 
+        enterprise rigour on the other — is what I bring to every problem I walk into.
+      </p>
+      <p>
+        These days I'm equally obsessed with what AI makes possible. On the side, I'm building 
+        B2C micro-SaaS products and consumer apps — some utilitarian, some just fun. 
+        <strong>Building is how I think and learn.</strong> Nothing sharpens product instincts 
+        faster than owning the whole stack yourself.
+      </p>
+    </div>
+    <div class="philosophy-list">
+      <div class="phil-item">
+        <div class="phil-num">01</div>
+        <div>
+          <div class="phil-title">Problems before solutions, always</div>
+          <div class="phil-body">I've seen too many teams fall in love with a feature before they've understood the pain. My first instinct is to slow down and make sure we're solving the right thing — then move fast.</div>
+        </div>
+      </div>
+      <div class="phil-item">
+        <div class="phil-num">02</div>
+        <div>
+          <div class="phil-title">Strategy has to survive contact with engineering</div>
+          <div class="phil-body">A beautiful roadmap that falls apart in sprint planning isn't strategy — it's a wish list. I stay close to the build to close the gap between vision and execution.</div>
+        </div>
+      </div>
+      <div class="phil-item">
+        <div class="phil-num">03</div>
+        <div>
+          <div class="phil-title">Data tells you what. Users tell you why.</div>
+          <div class="phil-body">Metrics show you a drop-off. They won't tell you why the CTA is in the wrong language or the flow assumes a mental model your user doesn't have. I use both, and I don't confuse one for the other.</div>
+        </div>
+      </div>
+      <div class="phil-item">
+        <div class="phil-num">04</div>
+        <div>
+          <div class="phil-title">The best PMs make teams feel the mission</div>
+          <div class="phil-body">Roadmap alignment and sprint rituals are all in service of one thing: a team that ships with conviction. That's the environment I try to create.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FIT TABLE -->
+<section class="fit-section" id="fit">
+  <div class="section-header">
+    <span class="section-num">02</span>
+    <h2 class="section-title">Why I <em>Fit</em></h2>
+    <div class="section-line"></div>
+  </div>
+  <table class="fit-table">
+    <thead>
+      <tr>
+        <th style="width: 38%">LJI Requirement</th>
+        <th>My Evidence</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="fit-req">"Own the complete product lifecycle — loyalty program strategy, engagement mechanics, CLV impact, enterprise scale"</td>
+        <td class="fit-evidence">
+          I've owned a loyalty and rewards platform end-to-end — from product vision and tier mechanics through MVP launch, 220+ site rollout, and continuous post-launch optimisation. I understand engagement frequency, retention, and programme adoption as metrics I've <strong>personally moved.</strong>
+          <div class="fit-badges">
+            <span class="badge badge-accent">791K enrolments</span>
+            <span class="badge badge-accent">220+ sites</span>
+            <span class="badge badge-teal">50%+ adoption</span>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td class="fit-req">"Hands-on experience building AI-powered features leveraging LLMs, AI agents, automation workflows in production environments"</td>
+        <td class="fit-evidence">
+          Delivered production multi-agent LLM pipelines using MCP integration — covering story creation, documentation generation, and QA test authoring with human-in-the-loop review. <strong>Live tooling my team depends on,</strong> not a proof-of-concept. Also authored Deloitte Digital's GenAI Adoption Playbook.
+          <div class="fit-badges">
+            <span class="badge badge-accent">Production LLM agents</span>
+            <span class="badge badge-navy">MCP integration</span>
+            <span class="badge badge-teal">GenAI Playbook author</span>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td class="fit-req">"Monitor product performance using data and analytics to improve adoption, engagement, retention, and business impact"</td>
+        <td class="fit-evidence">
+          I own product KPIs across the loyalty platform — tracking enrolment rates, engagement frequency, and tier progression. Ran 200K-member A/B experiment, <strong>called a null result early</strong> to redirect investment, and drove +5% engagement frequency in a 12K-member Promotions test.
+          <div class="fit-badges">
+            <span class="badge badge-accent">200K A/B cohort</span>
+            <span class="badge badge-gold">+5% engagement frequency</span>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td class="fit-req">"Create and maintain clear PRDs, user stories, functional specs, GTM plans, release documentation"</td>
+        <td class="fit-evidence">
+          I author PRDs and functional specs as the <strong>authoritative delivery reference</strong> for Engineering, QA, and client implementation teams. Write and groom user stories across a 4-person PO team and release notes that enable cross-team readiness at every milestone.
+          <div class="fit-badges">
+            <span class="badge badge-navy">PRDs · Functional specs</span>
+            <span class="badge badge-teal">Release documentation</span>
+            <span class="badge badge-accent">4 POs managed</span>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td class="fit-req">"2–3 years mentoring Product Managers, driving alignment and execution across multiple stakeholders"</td>
+        <td class="fit-evidence">
+          Led and mentored a team of 4 product owners at Deloitte — coaching on story writing, prioritisation, and stakeholder management. Contributed practice frameworks and reusable delivery templates. <strong>Regularly influenced senior client stakeholders</strong> on investment decisions through evidence-based business cases.
+          <div class="fit-badges">
+            <span class="badge badge-accent">4 POs mentored</span>
+            <span class="badge badge-navy">Practice standards</span>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td class="fit-req">"MBA from a premier B-School is a MUST — engineering degree preferred"</td>
+        <td class="fit-evidence">
+          MBA from UPES (2014) + B.Tech in Engineering (2013). Also holds <strong>Product Management Certification from Duke Corporate Education</strong> and SAFe® 6 Agilist certification. 10+ years of product experience across enterprise and consumer contexts.
+          <div class="fit-badges">
+            <span class="badge badge-teal">MBA + B.Tech</span>
+            <span class="badge badge-gold">Duke PM Cert</span>
+            <span class="badge badge-navy">SAFe® 6 Agilist</span>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <!-- Mid-page CTA -->
+  <div style="margin-top: 60px; padding: 48px; background: var(--surface-card); border: 1px solid var(--border); border-radius: var(--radius-lg); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 24px;">
+    <div>
+      <div style="font-family: 'Syne', sans-serif; font-size: 22px; font-weight: 700; color: var(--ink); margin-bottom: 6px;">Convinced this is a match?</div>
+      <div style="font-size: 15px; color: var(--ink-muted);">I'm based in Hyderabad, available for onsite at LJI, and ready to move fast.</div>
+    </div>
+    <a href="mailto:vihan1691@gmail.com" class="btn-primary">Get in Touch →</a>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-header">
+    <span class="section-num">03</span>
+    <h2 class="section-title">Where I <em>Built</em> This</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="exp-grid">
+
+    <!-- Deloitte -->
+    <div class="exp-item">
+      <div class="exp-meta">
+        <div class="exp-company">Deloitte Digital</div>
+        <div class="exp-role">Product Manager II · Loyalty, Engagement & Enterprise Platforms</div>
+        <div class="exp-period">DEC 2020 – PRESENT · HYDERABAD</div>
+        <div class="exp-kpis">
+          <div class="exp-kpi">
+            <div class="exp-kpi-num">791<span>K</span></div>
+            <div class="exp-kpi-label">Member enrolments · 7 months</div>
+          </div>
+          <div class="exp-kpi">
+            <div class="exp-kpi-num">50<span>%+</span></div>
+            <div class="exp-kpi-label">Adoption at MVP launch</div>
+          </div>
+          <div class="exp-kpi">
+            <div class="exp-kpi-num"><span>+</span>5<span>%</span></div>
+            <div class="exp-kpi-label">Engagement frequency</div>
+          </div>
+          <div class="exp-kpi">
+            <div class="exp-kpi-num">200<span>K</span></div>
+            <div class="exp-kpi-label">A/B experiment cohort</div>
+          </div>
+        </div>
+      </div>
+      <div class="exp-content">
+        <div class="exp-title">Loyalty & Rewards Platform</div>
+        <div class="exp-subtitle">0→1 PRODUCT OWNERSHIP · AGENTIC AI DELIVERY · TEAM MENTORING</div>
+        <ul class="exp-bullets">
+          <li>Owned product vision, strategy, and full lifecycle for a <strong>loyalty and rewards platform</strong> — designed tier mechanics, promotions framework, and member onboarding journey; scaled from MVP to 220+ sites in 7 months driving 791K+ enrolments.</li>
+          <li>Ran <strong>data-driven experimentation at scale:</strong> 200K-member A/B experiment (null result called early, investment redirected), 12K-member Promotions test (+5% engagement frequency in 14 weeks).</li>
+          <li>Authored PRDs, functional specs, user stories, and release notes as <strong>authoritative delivery reference</strong> for Engineering, QA, and client implementation teams; led feature enablement sessions across 220+ site network.</li>
+          <li>Delivered <strong>production multi-agent LLM pipelines</strong> via VS Code + MCP integration — story creation, documentation generation, QA test authoring with human-in-the-loop review. Authored Deloitte Digital's GenAI Adoption Playbook.</li>
+          <li><strong>Mentored 4 product owners;</strong> contributed practice frameworks and delivery templates; influenced senior stakeholders on investment decisions through evidence-based business cases.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- QuaQua -->
+    <div class="exp-item">
+      <div class="exp-meta">
+        <div class="exp-company">QuaQua</div>
+        <div class="exp-role">Product Owner · Consumer Engagement Platform · 4th Founding Member</div>
+        <div class="exp-period">DEC 2016 – NOV 2020 · HYDERABAD</div>
+        <div class="exp-kpis">
+          <div class="exp-kpi">
+            <div class="exp-kpi-num">1<span>M+</span></div>
+            <div class="exp-kpi-label">MAU in year one</div>
+          </div>
+          <div class="exp-kpi">
+            <div class="exp-kpi-num"><span>+</span>28<span>%</span></div>
+            <div class="exp-kpi-label">Session duration</div>
+          </div>
+          <div class="exp-kpi">
+            <div class="exp-kpi-num">660<span>+</span></div>
+            <div class="exp-kpi-label">Days personalised content</div>
+          </div>
+          <div class="exp-kpi">
+            <div class="exp-kpi-num">4</div>
+            <div class="exp-kpi-label">Content channels · 30 days</div>
+          </div>
+        </div>
+      </div>
+      <div class="exp-content">
+        <div class="exp-title">Consumer Engagement Platform</div>
+        <div class="exp-subtitle">0→1 FOUNDER PM · GROWTH EXPERIMENTATION · PERSONALISATION ENGINE</div>
+        <ul class="exp-bullets">
+          <li>Built <strong>consumer engagement platform from 0→1</strong> as 4th founding team member — scaled to 1M+ MAU in year one, owning full lifecycle from discovery through post-launch optimisation.</li>
+          <li>Used Mixpanel and GA4 to <strong>diagnose behavioural drop-offs;</strong> launched QuaQua TV — increased session duration 28% (2.5→3.2 min), scaled to 4 content channels in 30 days.</li>
+          <li>Directed <strong>personalised content engine</strong> generating 660+ days of curated experiences across 110 cities via API integrations — early-stage AI-assisted personalisation at consumer scale.</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills" style="background: var(--surface-alt);">
+  <div class="section-header">
+    <span class="section-num">04</span>
+    <h2 class="section-title">What I <em>Bring</em></h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="skills-grid">
+    <div class="skill-card">
+      <div class="skill-category">Core</div>
+      <div class="skill-heading">Loyalty & Product Management</div>
+      <div class="skill-items">
+        <div class="skill-row">
+          <div class="skill-name">Loyalty Program Strategy</div>
+          <div class="skill-bar"><div class="skill-fill" style="width: 100%"></div></div>
+        </div>
+        <div class="skill-row">
+          <div class="skill-name">Full Product Lifecycle</div>
+          <div class="skill-bar"><div class="skill-fill" style="width: 100%"></div></div>
+        </div>
+        <div class="skill-row">
+          <div class="skill-name">Roadmapping & Prioritisation</div>
+          <div class="skill-bar"><div class="skill-fill" style="width: 95%"></div></div>
+        </div>
+        <div class="skill-row">
+          <div class="skill-name">PRDs · User Stories · Specs</div>
+          <div class="skill-bar"><div class="skill-fill" style="width: 100%"></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-category">AI-First</div>
+      <div class="skill-heading">Agentic AI & LLM Delivery</div>
+      <div class="skill-items">
+        <div class="skill-row">
+          <div class="skill-name">Multi-Agent LLM Pipelines</div>
+          <div class="skill-bar"><div class="skill-fill" style="width: 95%"></div></div>
+        </div>
+        <div class="skill-row">
+          <div class="skill-name">MCP Integration & Agents</div>
+          <div class="skill-bar"><div class="skill-fill" style="width: 90%"></div></div>
+        </div>
+        <div class="skill-row">
+          <div class="skill-name">Prompt Engineering & HITL</div>
+          <div class="skill-bar"><div class="skill-fill" style="width: 90%"></div></div>
+        </div>
+        <div class="skill-row">
+          <div class="skill-name">GenAI SDLC Automation</div>
+          <div class="skill-bar"><div class="skill-fill" style="width: 85%"></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-category">Metrics</div>
+      <div class="skill-heading">Data & Engagement Analytics</div>
+      <div class="skill-items">
+        <div class="skill-row">
+          <div class="skill-name">Loyalty KPI Ownership</div>
+          <div class="skill-bar"><div class="skill-fill" style="width: 100%"></div></div>
+        </div>
+        <div class="skill-row">
+          <div class="skill-name">A/B Experiment Design</div>
+          <div class="skill-bar"><div class="skill-fill" style="width: 95%"></div></div>
+        </div>
+        <div class="skill-row">
+          <div class="skill-name">Mixpanel · GA4 · Funnels</div>
+          <div class="skill-bar"><div class="skill-fill" style="width: 90%"></div></div>
+        </div>
+        <div class="skill-row">
+          <div class="skill-name">SQL & Behavioural Analytics</div>
+          <div class="skill-bar"><div class="skill-fill" style="width: 80%"></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-category">Delivery</div>
+      <div class="skill-heading">Design & Collaboration</div>
+      <div class="skill-items">
+        <div class="skill-row">
+          <div class="skill-name">Figma Prototyping</div>
+          <div class="skill-bar"><div class="skill-fill" style="width: 90%"></div></div>
+        </div>
+        <div class="skill-row">
+          <div class="skill-name">Agile / SAFe® 6</div>
+          <div class="skill-bar"><div class="skill-fill" style="width: 100%"></div></div>
+        </div>
+        <div class="skill-row">
+          <div class="skill-name">Cross-Functional Leadership</div>
+          <div class="skill-bar"><div class="skill-fill" style="width: 95%"></div></div>
+        </div>
+        <div class="skill-row">
+          <div class="skill-name">PM Team Mentoring</div>
+          <div class="skill-bar"><div class="skill-fill" style="width: 90%"></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="contact">
+  <div class="cta-eyebrow">Ready to Talk</div>
+  <h2 class="cta-title">Let's build what's<br><em>next for GRAVTY®</em></h2>
+  <p class="cta-sub">Based in Hyderabad. Available onsite. Ready to move as fast as you need.</p>
+  <div class="cta-actions">
+    <a href="mailto:vihan1691@gmail.com" class="btn-big">vihan1691@gmail.com</a>
+    <a href="https://linkedin.com/in/vihan-sharma" target="_blank" class="btn-big-ghost">LinkedIn →</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span class="f-name">Vihan Sharma</span>
+  <span>Hyderabad · +91-70322-08045</span>
+  <div class="f-links">
+    <a href="mailto:vihan1691@gmail.com">Email</a>
+    <a href="https://linkedin.com/in/vihan-sharma" target="_blank">LinkedIn</a>
+  </div>
+</footer>
+
+</body>
+</html>
